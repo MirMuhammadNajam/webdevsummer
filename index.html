@@ -1,21 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+div {
+    background-color:lightgrey ;
+}
+</style>
 </head>
 <body>
-  <div class="container">
-    <img src="C:\Users\delegates\Desktop\image.jpg" alt="Your Profile Picture" class="profile-img">
-    <h1 id="name">Mir Muhammad Najam</h1>
-    <p class="intro">Hi! I'm a passionate developer with a love for clean code, creative design, and solving real-world problems.</p>
-    <button onclick="showGreeting()">Hello!</button>
-    <p id="greeting" class="greeting"></p>
-  </div>
-  <div class = "box1"></div>
-  
-  <script src="script.js"></script>
+    <header class="site-header">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+            <i class="fas fa-moon"></i>
+        </button>
+        
+    </header>
+    <div id="sidebar" class="sidebar">
+        <a href="#" class="close-btn" onclick="toggleSidebar()">×</a>
+        <a href="newpage.html">New Page</a>
+        <a href="#">Another Link</a>
+        <!-- Add more links as needed -->
+    </div>
+    
+    <div class="portfolio-container">
+        <img src="C:\Users\delegates\Desktop\test\image.jpg" alt="Your Name" class="profile-image">
+        <h1>John Doe</h1>
+        <p class="description">
+            Hello! I'm a passionate developer with a love for creating clean, efficient, and user-friendly applications.
+        </p>
+        <button onclick="closeWebsite()">More about me</button>
+        <button onclick="openMultipleTabs()">Log Out</button>
+    </div>
+
+    <script src="script.js"></script>
+    <div class = "tictactobox" ></div>
 </body>
 </html>
+

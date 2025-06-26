@@ -1,0 +1,202 @@
+body {
+    font-family: Arial,sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.portfolio-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 400px;
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 50px;
+}
+
+button {
+    background-color: #b6b6b6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #284194;
+}
+button {
+    background-color: #386ddd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px; /* Adds space if stacked vertically */
+}
+
+button:hover {
+    background-color: #284194;
+}
+.site-header {
+    width: 100%;
+    background-color: #575757;
+    padding: 15px 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.header-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.header-link:hover {
+    text-decoration: underline;
+}
+body {
+    overflow-x: hidden;
+}
+.site-header {
+    width: 100%;
+    background-color: #575757;
+    padding: 6px 14px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.dark-mode-toggle {
+    background-color: #222;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    padding-right: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dark-mode-toggle:hover {
+    background-color: #444;
+}
+.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode .portfolio-container {
+    background-color: #1e1e1e;
+}
+
+.dark-mode .description {
+    color: #ccc;
+}
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    margin-left: auto;
+}
+
+.dark-mode-toggle:hover {
+    color: #dddddd;
+}
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    margin-left: auto;
+}
+/* Hamburger Button */
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px; /* Fixed width */
+    background-color: #333;
+    padding-top: 60px;
+    transform: translateX(-100%); /* Hidden by default */
+    transition: transform 0.3s ease;
+    z-index: 999;
+}
+
+.sidebar.open {
+    transform: translateX(0); /* Slide in */
+}
+
+
+.sidebar a {
+    padding: 10px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background-color: #575757;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 36px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
