@@ -5,14 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Manic Menu</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+<div id="mode-transition"></div>
+
   <header class="site-header">
     <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
     <h1 class="site-title">Manic</h1>
-    <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+<button class="dark-mode-toggle" onclick="toggleDarkMode()" id="theme-toggle">
+  <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#ffcc00">
+    <path d="M12 18a6 6 0 100-12 6 6 0 000 12zm0-14a1 1 0 011-1h0a1 1 0 010 2h0a1 1 0 01-1-1zm0 16a1 1 0 011-1h0a1 1 0 010 2h0a1 1 0 01-1-1zm10-6a1 1 0 01-1-1v0a1 1 0 012 0v0a1 1 0 01-1 1zM3 12a1 1 0 01-1-1v0a1 1 0 012 0v0a1 1 0 01-1 1zm15.07 6.07a1 1 0 011.41 0v0a1 1 0 01-1.41 1.41v0a1 1 0 010-1.41zM6.34 6.34a1 1 0 011.41 0v0a1 1 0 01-1.41 1.41v0a1 1 0 010-1.41zm11.32-1.41a1 1 0 011.41 1.41v0a1 1 0 01-1.41-1.41zm-12.73 12.73a1 1 0 011.41 1.41v0a1 1 0 01-1.41-1.41z"/>
+  </svg>
+  <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#00ccff" style="display: none;">
+    <path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1012 21a9 9 0 009-8.21z"/>
+  </svg>
+</button>
+
   </header>
+
+  <div id="sidebar-overlay" onclick="closeSidebar()"></div>
 
   <div id="sidebar">
     <button class="close-btn" onclick="toggleSidebar()">×</button>
@@ -24,22 +36,14 @@
 
   <div class="content-wrapper">
     <div class="portfolio-container">
-      <img src="profile.jpg" alt="Profile Image" class="profile-image">
       <h2>Welcome to Manic</h2>
       <p class="description">Choose a game to start playing:</p>
-      <button onclick="location.href='snake.html'">🐍 Snake Game</button>
-      <button onclick="location.href='tictactoe.html'">❌⭕ Tic Tac Toe</button>
+      <div class="game-buttons">
+        <button onclick="location.href='snake.html'">🐍 Snake Game</button>
+        <button onclick="location.href='tictactoe.html'">❌⭕ Tic Tac Toe</button>
+      </div>
     </div>
   </div>
-
-  <script>
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('open');
-    }
-
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

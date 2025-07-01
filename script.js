@@ -1,49 +1,52 @@
-// Toggle Sidebar
 function toggleSidebar() {
-  const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("open");
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  sidebar.classList.toggle('open');
+  overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
 }
 
-// Toggle Dark Mode with Local Storage
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').style.display = 'none';
+}
+
 function toggleDarkMode() {
-  document.body.classList.toggle("dark-mode");
-  const isDark = document.body.classList.contains("dark-mode");
-  localStorage.setItem("dark-mode", isDark ? "enabled" : "disabled");
+  document.body.classList.add('fading');
+  setTimeout(() => {
+    document.body.classList.toggle('dark-mode');
+    document.body.classList.remove('fading');
+  }, 300);
 }
 
-// Load dark mode preference on page load
-window.onload = () => {
-  if (localStorage.getItem("dark-mode") === "enabled") {
-    document.body.classList.add("dark-mode");
-  }
-};
+function toggleDarkMode() {
+  document.body.classList.add('fading');
+  setTimeout(() => {
+    document.body.classList.toggle('dark-mode');
+    document.body.classList.remove('fading');
 
-// Simulate closing the website
-function closeWebsite() {
-  window.open('', '_self');
-  window.close();
+    const sun = document.getElementById('sun-icon');
+    const moon = document.getElementById('moon-icon');
+
+    if (document.body.classList.contains('dark-mode')) {
+      sun.style.display = 'none';
+      moon.style.display = 'inline';
+    } else {
+      sun.style.display = 'inline';
+      moon.style.display = 'none';
+    }
+  }, 300);
 }
 
-// Open multiple tabs (fun effect)
-function openMultipleTabs() {
-  for (let i = 0; i < 3; i++) {
-    setTimeout(() => {
-      window.open(window.location.href, '_blank');
-    }, i * 100);
+// On load: match icon to theme
+window.addEventListener('DOMContentLoaded', () => {
+  const sun = document.getElementById('sun-icon');
+  const moon = document.getElementById('moon-icon');
+
+  if (document.body.classList.contains('dark-mode')) {
+    sun.style.display = 'none';
+    moon.style.display = 'inline';
+  } else {
+    sun.style.display = 'inline';
+    moon.style.display = 'none';
   }
-}
-
-// Optional: Close sidebar when clicking outside
-document.addEventListener("click", function (event) {
-  const sidebar = document.getElementById("sidebar");
-  const toggleButton = event.target.closest(".menu-toggle");
-
-  if (
-    sidebar.classList.contains("open") &&
-    !sidebar.contains(event.target) &&
-    !toggleButton
-  ) {
-    sidebar.classList.remove("open");
-  }
-})
-
+});
