@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-div {
-    background-color:lightgrey ;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manic Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="site-header">
-        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-        <button class="dark-mode-toggle" onclick="toggleDarkMode()">
-            <i class="fas fa-moon"></i>
-        </button>
-        
-    </header>
-    <div id="sidebar" class="sidebar">
-        <a href="#" class="close-btn" onclick="toggleSidebar()">×</a>
-        <a href="newpage.html">New Page</a>
-        <a href="#">Another Link</a>
-        <!-- Add more links as needed -->
-    </div>
-    
-    <div class="portfolio-container">
-        <img src="C:\Users\delegates\Desktop\test\image.jpg" alt="Your Name" class="profile-image">
-        <h1>John Doe</h1>
-        <p class="description">
-            Hello! I'm a passionate developer with a love for creating clean, efficient, and user-friendly applications.
-        </p>
-        <button onclick="closeWebsite()">More about me</button>
-        <button onclick="openMultipleTabs()">Log Out</button>
-    </div>
+  <header class="site-header">
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <h1 class="site-title">Manic</h1>
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+  </header>
 
-    <script src="script.js"></script>
-    <div class = "tictactobox" ></div>
+  <div id="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <a href="index.html">Home</a>
+    <a href="snake.html">Snake</a>
+    <a href="tictactoe.html">Tic Tac Toe</a>
+    <a href="about.html">About</a>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="portfolio-container">
+      <img src="profile.jpg" alt="Profile Image" class="profile-image">
+      <h2>Welcome to Manic</h2>
+      <p class="description">Choose a game to start playing:</p>
+      <button onclick="location.href='snake.html'">🐍 Snake Game</button>
+      <button onclick="location.href='tictactoe.html'">❌⭕ Tic Tac Toe</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
 </body>
 </html>
-

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Snake Game</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #121212;
+      color: white;
+      font-family: 'Press Start 2P', Arial, sans-serif;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    #gameWrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+
+    #mainContent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: auto;
+    }
+
+    canvas {
+      background-color: #000;
+      box-shadow: 0 0 30px #00ff00;
+      border-radius: 6px;
+      margin-top: 20px;
+    }
+
+    #scoreDisplay {
+      font-size: 14px;
+      background: #1e1e1e;
+      padding: 12px 24px;
+      border: 2px solid #00ff00;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #00ff00;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      background: rgba(0, 0, 0, 0.9);
+      color: #00ff00;
+      padding: 20px 40px;
+      border-radius: 10px;
+      border: 2px solid #00ff00;
+      box-shadow: 0 0 15px #00ff00;
+      font-family: 'Press Start 2P', Arial, sans-serif;
+      z-index: 2;
+    }
+
+    #leaderboard {
+      margin: 30px 40px;
+      padding: 10px 20px;
+      background: #1a1a1a;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #222;
+      text-align: center;
+      width: 200px;
+      height: fit-content;
+    }
+
+    #leaderboard h2 {
+      margin-top: 0;
+      color: #ffcc00;
+      font-size: 16px;
+    }
+
+    #highScoresList {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0 0;
+    }
+
+    #highScoresList li {
+      font-size: 12px;
+      margin-bottom: 5px;
+      color: #ddd;
+    }
+
+    #backButton {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 10px 20px;
+      background: #222;
+      color: #fff;
+      border: 2px solid #00ff00;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+  <div id="gameWrapper">
+    <button id="backButton" onclick="window.location.href='index.html'">← Back</button>
+    <div id="mainContent">
+      <div id="scoreDisplay">Score: 0</div>
+      <canvas id="gameCanvas" width="400" height="400"></canvas>
+    </div>
+    <div id="leaderboard">
+      <h2>Top Scores</h2>
+      <ul id="highScoresList"></ul>
+    </div>
+    <div id="startScreen" class="overlay">
+      Press any key to start
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const highScoresList = document.getElementById('highScoresList');
+    const startScreen = document.getElementById('startScreen');
+
+    const box = 20;
+    let snake = [{x: 9 * box, y: 10 * box}];
+    let direction;
+    let food = spawnFood();
+    let score = 0;
+    let game;
+    let gameStarted = false;
+
+    document.addEventListener('keydown', handleInitialKey);
+
+    function handleInitialKey(e) {
+      if (!gameStarted) {
+        gameStarted = true;
+        startScreen.style.display = 'none';
+        document.addEventListener('keydown', changeDirection);
+        game = setInterval(draw, 100);
+      }
+    }
+
+    function changeDirection(e) {
+      if (e.key === 'ArrowLeft' && direction !== 'RIGHT') direction = 'LEFT';
+      else if (e.key === 'ArrowUp' && direction !== 'DOWN') direction = 'UP';
+      else if (e.key === 'ArrowRight' && direction !== 'LEFT') direction = 'RIGHT';
+      else if (e.key === 'ArrowDown' && direction !== 'UP') direction = 'DOWN';
+    }
+
+    function spawnFood() {
+      return {
+        x: Math.floor(Math.random() * 19 + 1) * box,
+        y: Math.floor(Math.random() * 19 + 1) * box
+      };
+    }
+
+    function draw() {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < snake.length; i++) {
+        ctx.fillStyle = (i === 0) ? '#00ff00' : '#00aa00';
+        ctx.fillRect(snake[i].x, snake[i].y, box, box);
+      }
+
+      ctx.fillStyle = '#ff0000';
+      ctx.fillRect(food.x, food.y, box, box);
+
+      let headX = snake[0].x;
+      let headY = snake[0].y;
+
+      if (direction === 'LEFT') headX -= box;
+      if (direction === 'RIGHT') headX += box;
+      if (direction === 'UP') headY -= box;
+      if (direction === 'DOWN') headY += box;
+
+      if (headX === food.x && headY === food.y) {
+        score++;
+        scoreDisplay.textContent = 'Score: ' + score;
+        food = spawnFood();
+      } else {
+        snake.pop();
+      }
+
+      const newHead = { x: headX, y: headY };
+
+      if (headX < 0 || headX >= canvas.width || headY < 0 || headY >= canvas.height || collision(newHead, snake)) {
+        clearInterval(game);
+        setTimeout(() => {
+          const name = prompt('Game Over! Enter your initials (3 letters):', '').substring(0, 3).toUpperCase();
+          if (name) updateHighScores(name, score);
+          location.reload();
+        }, 100);
+        return;
+      }
+
+      snake.unshift(newHead);
+    }
+
+    function collision(head, array) {
+      for (let segment of array) {
+        if (head.x === segment.x && head.y === segment.y) return true;
+      }
+      return false;
+    }
+
+    function updateHighScores(name, score) {
+      const highScores = JSON.parse(localStorage.getItem('snakeHighScores')) || [];
+      highScores.push({ name, score });
+      highScores.sort((a, b) => b.score - a.score);
+      localStorage.setItem('snakeHighScores', JSON.stringify(highScores.slice(0, 10)));
+    }
+
+    function loadHighScores() {
+      const scores = JSON.parse(localStorage.getItem('snakeHighScores')) || [];
+      highScoresList.innerHTML = '';
+      scores.forEach(entry => {
+        const li = document.createElement('li');
+        li.textContent = `${entry.name} - ${entry.score}`;
+        highScoresList.appendChild(li);
+      });
+    }
+
+    loadHighScores();
+  </script>
+</body>
+</html>
