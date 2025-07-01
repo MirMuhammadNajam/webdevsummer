@@ -207,5 +207,5 @@ body.dark-mode .game-buttons button:hover {
 }
 
 .dark-mode-toggle:hover {
-  transform: scale(2);
+  transform: scale(1.1);
 }
